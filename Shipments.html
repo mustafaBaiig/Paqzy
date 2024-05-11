@@ -18,11 +18,14 @@
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
         }
 
         /* Sidebar Styles */
         .sidebar {
             width: 250px;
+            min-width: 250px;
             height: 100vh;
             background-color: #2c3e50;
             color: #fff;
@@ -30,6 +33,7 @@
             left: 0;
             top: 0;
             overflow-y: auto;
+            transition: width 0.3s;
         }
 
         .sidebar-header {
@@ -65,6 +69,7 @@
         .main-content {
             margin-left: 250px;
             padding: 20px;
+            transition: margin-left 0.3s;
         }
 
         .main-header {
@@ -109,8 +114,8 @@
             font-weight: bold;
             color: #2c3e50;
             display: flex;
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
+            align-items: center;
+            justify-content: center;
         }
 
         .logout-btn {
@@ -135,10 +140,15 @@
         }
 
         /* Shipments Table Styles */
+        .table-wrapper {
+            overflow-x: auto; /* Enable horizontal scrolling */
+            margin-top: 20px;
+        }
+
         .shipments-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            min-width: 800px; /* Adjusted minimum width */
         }
 
         .shipments-table th,
@@ -154,6 +164,60 @@
 
         .shipments-table tbody tr:nth-child(even) {
             background-color: #f9f9f9;
+        }
+
+        /* Media Queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 30%;
+                min-width: 80px; /* Adjusted minimum width */
+            }
+
+            .main-content {
+                margin-left: 30%;
+            }
+
+            .sidebar-menu {
+                padding: 10px;
+            }
+
+            .sidebar-menu li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar-menu a {
+                padding: 10px;
+            }
+
+            .sidebar-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .user-profile {
+                margin-right: 10px;
+            }
+
+            .user-profile img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .user-profile span {
+                font-size: 0.8rem;
+            }
+
+            .logout-btn {
+                font-size: 0.8rem;
+            }
+
+            .content-area {
+                padding: 15px;
+            }
+
+            .content-area h2 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
         }
     </style>
 
@@ -183,8 +247,7 @@
             </div>
             <div class="header-right">
                 <div class="user-profile">
-                    <img src="Admin.jpg"
-                        alt="Admin Profile">
+                    <img src="Admin.jpg" alt="Admin Profile">
                     <span>Admin</span>
                 </div>
                 <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -193,101 +256,103 @@
         <section class="content-area">
             <h2>Shipments Overview</h2>
             <!-- Shipments Table -->
-            <table class="shipments-table">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Customer Name</th>
-                        <th>Shipping Address</th>
-                        <th>Courier Service</th>
-                        <th>Shipped Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dummy Data -->
-                    <tr>
-                        <td>721909</td>
-                        <td>Ahmad Nizami</td>
-                        <td>People Colony, Faislabad.</td>
-                        <td>Leopord</td>
-                        <td>2024-05-01</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>789012</td>
-                        <td>Ateeq Aslam</td>
-                        <td>19, Hanjarwal, Mansoorah, Lahore.</td>
-                        <td>TCS</td>
-                        <td>2024-05-02</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>345678</td>
-                        <td>Faisal Chaudhary</td>
-                        <td>09 Mansoorah Main market, Multan Road, Lahore.</td>
-                        <td>Leopord</td>
-                        <td>2024-05-03</td>
-                        <td>Delayed</td>
-                    </tr>
-                    <tr>
-                        <td>901234</td>
-                        <td>Areeb Akbar</td>
-                        <td>364 Shamshirpur, Gojra.</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                        <td>Cancelled</td>
-                    </tr>
-                    <tr>
-                        <td>567890</td>
-                        <td>Mustafa Khan</td>
-                        <td>9 Shakir street, Johar town, Lahore.</td>
-                        <td>TCS</td>
-                        <td>2024-05-05</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>234567</td>
-                        <td>Moiz Ahmad</td>
-                        <td>Leopord office, Swat, Pakistan.</td>
-                        <td>Leopord</td>
-                        <td>2024-05-06</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>890123</td>
-                        <td>Hareem Bukhtawar</td>
-                        <td>12 Gajju maata, Main street, Lahore.</td>
-                        <td>TCS</td>
-                        <td>2024-05-07</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>456789</td>
-                        <td>Akshay Singh</td>
-                        <td>81 Smart Flats, Karachi</td>
-                        <td>TCS</td>
-                        <td>2024-05-08</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>012345</td>
-                        <td>Maryam Jutt</td>
-                        <td>789 Place, Faislabad</td>
-                        <td>FEDex</td>
-                        <td>2024-05-09</td>
-                        <td>Shipped</td>
-                    </tr>
-                    <tr>
-                        <td>678901</td>
-                        <td>Ayesha Khan</td>
-                        <td>890 Road, Multan</td>
-                        <td>Leopord</td>
-                        <td>2024-05-10</td>
-                        <td>Shipped</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table class="shipments-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer Name</th>
+                            <th>Shipping Address</th>
+                            <th>Courier Service</th>
+                            <th>Shipped Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dummy Data -->
+                        <tr>
+                            <td>721909</td>
+                            <td>Ahmad Nizami</td>
+                            <td>People Colony, Faislabad.</td>
+                            <td>Leopord</td>
+                            <td>2024-05-01</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>789012</td>
+                            <td>Ateeq Aslam</td>
+                            <td>19, Hanjarwal, Mansoorah, Lahore.</td>
+                            <td>TCS</td>
+                            <td>2024-05-02</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>345678</td>
+                            <td>Faisal Chaudhary</td>
+                            <td>09 Mansoorah Main market, Multan Road, Lahore.</td>
+                            <td>Leopord</td>
+                            <td>2024-05-03</td>
+                            <td>Delayed</td>
+                        </tr>
+                        <tr>
+                            <td>901234</td>
+                            <td>Areeb Akbar</td>
+                            <td>364 Shamshirpur, Gojra.</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>Cancelled</td>
+                        </tr>
+                        <tr>
+                            <td>567890</td>
+                            <td>Mustafa Khan</td>
+                            <td>9 Shakir street, Johar town, Lahore.</td>
+                            <td>TCS</td>
+                            <td>2024-05-05</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>234567</td>
+                            <td>Moiz Ahmad</td>
+                            <td>Leopord office, Swat, Pakistan.</td>
+                            <td>Leopord</td>
+                            <td>2024-05-06</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>890123</td>
+                            <td>Hareem Bukhtawar</td>
+                            <td>12 Gajju maata, Main street, Lahore.</td>
+                            <td>TCS</td>
+                            <td>2024-05-07</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>456789</td>
+                            <td>Akshay Singh</td>
+                            <td>81 Smart Flats, Karachi</td>
+                            <td>TCS</td>
+                            <td>2024-05-08</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>012345</td>
+                            <td>Maryam Jutt</td>
+                            <td>789 Place, Faislabad</td>
+                            <td>FEDex</td>
+                            <td>2024-05-09</td>
+                            <td>Shipped</td>
+                        </tr>
+                        <tr>
+                            <td>678901</td>
+                            <td>Ayesha Khan</td>
+                            <td>890 Road, Multan</td>
+                            <td>Leopord</td>
+                            <td>2024-05-10</td>
+                            <td>Shipped</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
@@ -304,6 +369,15 @@
             const logoutBtn = document.querySelector('.logout-btn');
             logoutBtn.addEventListener('click', function () {
                 window.location.href = 'index.html';
+            });
+
+            const toggleSidebarBtn = document.querySelector('.toggle-sidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            toggleSidebarBtn.addEventListener('click', function () {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
             });
         });
     </script>
