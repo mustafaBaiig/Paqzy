@@ -26,6 +26,7 @@
         /* Sidebar Styles */
         .sidebar {
             width: 250px;
+            min-width: 250px;
             height: 100vh;
             background-color: #2c3e50;
             color: #fff;
@@ -33,6 +34,12 @@
             left: 0;
             top: 0;
             overflow-y: auto;
+            transition: width 0.3s;
+        }
+
+        .sidebar.collapsed {
+            width: 30%; /* Adjusted width when collapsed */
+            min-width: 80px; /* Adjusted minimum width */
         }
 
         .sidebar-header {
@@ -58,6 +65,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
+            padding: 10px;
         }
 
         .sidebar-menu a i {
@@ -68,6 +76,11 @@
         .main-content {
             margin-left: 250px;
             padding: 20px;
+            transition: margin-left 0.3s;
+        }
+
+        .main-content.collapsed {
+            margin-left: 30%; /* Adjusted margin when sidebar is collapsed */
         }
 
         .main-header {
@@ -138,43 +151,96 @@
             margin-bottom: 20px;
         }
 
-        .analytics-heading {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .analytics-item {
-            margin-bottom: 20px;
-        }
-
-        .analytics-item h3 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .analytics-item p {
-            font-size: 1rem;
-        }
-
         .chart-container {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 40px;
+            flex-wrap: wrap; /* Allow charts to wrap to the next line */
+            gap: 20px; /* Add gap between charts */
         }
 
         .chart {
-            width: 48%;
+            width: 100%;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Add space between charts */
         }
 
         .chart h3 {
             font-size: 1.2rem;
             margin-bottom: 20px;
+        }
+
+        /* Media Queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 30%; /* Sidebar width when minimized */
+                min-width: 80px; /* Adjusted minimum width */
+            }
+
+            .main-content {
+                margin-left: 30%; /* Adjusted margin when sidebar is minimized */
+            }
+
+            .sidebar-menu {
+                padding: 10px;
+            }
+
+            .sidebar-menu li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar-menu a {
+                padding: 10px;
+            }
+
+            .sidebar-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .user-profile {
+                margin-right: 10px;
+            }
+
+            .user-profile img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .user-profile span {
+                font-size: 0.8rem;
+            }
+
+            .logout-btn {
+                font-size: 0.8rem;
+            }
+
+            .content-area {
+                padding: 15px;
+            }
+
+            .content-area h2 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .chart {
+                width: calc(50% - 20px); /* Take 50% of the width minus gap */
+            }
+            .chart {
+    max-width: 100%; /* Ensure charts don't overflow their containers */
+    width: 100%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Add space between charts */
+}
+
+.chart h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
         }
     </style>
 
@@ -189,8 +255,8 @@
         <ul class="sidebar-menu">
             <li><a href="Admin.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="Analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
-            <li><a href=""><i class="fas fa-shopping-cart"></i> Manage Products</a></li>
-            <li><a href="Manageorders.html"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> Manage Products</a></li>
+            <li><a href="Revieworders.html"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
             <li><a href="Shipments.html"><i class="fas fa-shipping-fast"></i> Shipments</a></li>
             <li><a href="Reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
         </ul>
@@ -204,17 +270,13 @@
             </div>
             <div class="header-right">
                 <div class="user-profile">
-                    <img src="Admin.jpg"
-                        alt="Admin Profile">
+                    <img src="Admin.jpg" alt="Admin Profile">
                     <span>Admin</span>
                 </div>
                 <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </div>
         </header>
-        <section class="content-area">
-            <h2>Welcome to Admin Dashboard</h2>
-            <!-- Content Goes Here -->
-        </section>
+        
         <div class="content-area">
             <h2 class="analytics-heading">Analytics Overview</h2>
             <div class="chart-container">
@@ -228,8 +290,6 @@
                     <h3>Sessions</h3>
                     <canvas id="sessions-chart" width="400" height="200"></canvas>
                 </div>
-            </div>
-            <div class="chart-container">
                 <div class="chart">
                     <!-- Total Orders Chart -->
                     <h3>Total Orders</h3>
@@ -240,8 +300,6 @@
                     <h3>Orders to Fulfil</h3>
                     <canvas id="orders-to-fulfil-chart" width="400" height="200"></canvas>
                 </div>
-            </div>
-            <div class="chart-container">
                 <div class="chart">
                     <!-- Payments to Capture Chart -->
                     <h3>Payments to Capture</h3>
@@ -254,6 +312,15 @@
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const logoutBtn = document.querySelector('.logout-btn');
+                const sidebar = document.querySelector('.sidebar');
+                const mainContent = document.querySelector('.main-content');
+                const toggleSidebar = document.querySelector('.toggle-sidebar');
+
+                toggleSidebar.addEventListener('click', function () {
+                    sidebar.classList.toggle('collapsed');
+                    mainContent.classList.toggle('collapsed');
+                });
+
                 logoutBtn.addEventListener('click', function () {
                     window.location.href = 'index.html';
                 });
