@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #7FFFD4; /* Aquamarine background color */
+      display: flex;
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      height: 100vh;
+      margin: 0;
+    }
+    .signin-container {
+      width: 500px; /* Increased width */
+      padding: 40px; /* Increased padding */
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Center text elements */
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 20px; /* Center logo and add space below */
+      background-image: url('readme-images/PAQZY Shop.jpg');
+      height: 100px; /* Adjust as needed */
+      width: 100px; /* Adjust as needed */
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .btn-custom {
+      background-color: #7FFFD4 !important; /* Custom button color */
+      color: rgb(0, 0, 0) !important; /* Text color */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sign-in section -->
+  <section id="signin-section">
+    <div class="signin-container">
+      <div class="logo"></div> <!-- Logo placeholder -->
+
+      <form id="signin-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <!-- Add 'btn btn-custom' classes to the button -->
+        <button type="submit" class="btn btn-custom">Sign In</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const signinForm = document.getElementById("signin-form");
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
+
+      signinForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        // Check if the username and password match the credentials
+        if (username === "Admin" && password === "wizards") {
+          // Redirect the user to the index.html page
+          window.location.href = "Admin.html";
+        } else {
+          // Display an error message or handle incorrect credentials
+          alert("Incorrect username or password. Please try again.");
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>
