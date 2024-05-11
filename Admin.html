@@ -18,11 +18,14 @@
     body {
       font-family: 'Roboto', sans-serif;
       background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
     }
 
     /* Sidebar Styles */
     .sidebar {
       width: 250px;
+      min-width: 250px;
       height: 100vh;
       background-color: #2c3e50;
       color: #fff;
@@ -30,6 +33,7 @@
       left: 0;
       top: 0;
       overflow-y: auto;
+      transition: width 0.3s;
     }
 
     .sidebar-header {
@@ -65,6 +69,7 @@
     .main-content {
       margin-left: 250px;
       padding: 20px;
+      transition: margin-left 0.3s;
     }
 
     .main-header {
@@ -109,8 +114,8 @@
       font-weight: bold;
       color: #2c3e50;
       display: flex;
-      align-items: center; /* Center vertically */
-      justify-content: center; /* Center horizontally */
+      align-items: center;
+      justify-content: center;
     }
 
     .logout-btn {
@@ -133,6 +138,60 @@
       font-size: 1.5rem;
       margin-bottom: 20px;
     }
+
+    /* Media Queries for responsiveness */
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 30%;
+        min-width: 80px; /* Adjusted minimum width */
+      }
+
+      .main-content {
+        margin-left: 30%;
+      }
+
+      .sidebar-menu {
+        padding: 10px;
+      }
+
+      .sidebar-menu li {
+        margin-bottom: 10px;
+      }
+
+      .sidebar-menu a {
+        padding: 10px;
+      }
+
+      .sidebar-header h1 {
+        font-size: 1.2rem;
+      }
+
+      .user-profile {
+        margin-right: 10px;
+      }
+
+      .user-profile img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .user-profile span {
+        font-size: 0.8rem;
+      }
+
+      .logout-btn {
+        font-size: 0.8rem;
+      }
+
+      .content-area {
+        padding: 15px;
+      }
+
+      .content-area h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+      }
+    }
   </style>
 
 </head>
@@ -147,9 +206,9 @@
       <li><a href="Admin.html"><i class="fas fa-home"></i> Home</a></li>
       <li><a href="Analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
       <li><a href="#"><i class="fas fa-shopping-cart"></i> Manage Products</a></li>
-      <li><a href="#"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
+      <li><a href="Revieworders.html"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
       <li><a href="Shipments.html"><i class="fas fa-shipping-fast"></i> Shipments</a></li>
-      <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+      <li><a href="Reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
     </ul>
   </aside>
 
@@ -168,7 +227,7 @@
       </div>
     </header>
     <section class="content-area">
-      <h2>Welcome to Admin Dashboard</h2>
+      <h2>Welcome to Admin Dashboard </h2>
       <!-- Content Goes Here -->
     </section>
   </main>
@@ -185,8 +244,18 @@
       logoutBtn.addEventListener('click', function () {
         window.location.href = 'index.html';
       });
+
+      const toggleSidebarBtn = document.querySelector('.toggle-sidebar');
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+
+      toggleSidebarBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      });
     });
   </script>
 
 </body>
+
 </html>

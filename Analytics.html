@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Paqzy</title>
 
+  <!-- Chart.js Library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     /* Global Reset */
     * {
@@ -18,11 +21,14 @@
     body {
       font-family: 'Roboto', sans-serif;
       background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
     }
 
     /* Sidebar Styles */
     .sidebar {
       width: 250px;
+      min-width: 250px;
       height: 100vh;
       background-color: #2c3e50;
       color: #fff;
@@ -30,6 +36,7 @@
       left: 0;
       top: 0;
       overflow-y: auto;
+      transition: width 0.3s;
     }
 
     .sidebar-header {
@@ -65,6 +72,9 @@
     .main-content {
       margin-left: 250px;
       padding: 20px;
+      transition: margin-left 0.3s;
+      width: 70%;
+      float: right;
     }
 
     .main-header {
@@ -109,8 +119,8 @@
       font-weight: bold;
       color: #2c3e50;
       display: flex;
-      align-items: center; /* Center vertically */
-      justify-content: center; /* Center horizontally */
+      align-items: center;
+      justify-content: center;
     }
 
     .logout-btn {
@@ -133,65 +143,128 @@
       font-size: 1.5rem;
       margin-bottom: 20px;
     }
+
     .analytics-heading {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
 
-        .analytics-item {
-            margin-bottom: 20px;
-        }
+    .analytics-item {
+      margin-bottom: 20px;
+    }
 
-        .analytics-item h3 {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
+    .analytics-item h3 {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-        .analytics-item p {
-            font-size: 1rem;
-        }
+    .analytics-item p {
+      font-size: 1rem;
+    }
 
-        .chart-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 40px;
-        }
+    .chart-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 40px;
+    }
 
-        .dummy-chart {
-            width: 60%;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
+    .dummy-chart {
+      width: 100%;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
 
-        .dummy-chart h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
+    .dummy-chart h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
 
-        .calendar {
-            width: 35%;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
+    .calendar {
+      width: 100%;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
 
-        .calendar-heading {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
+    .calendar-heading {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
 
-        .calendar-day {
-            margin-bottom: 10px;
-        }
+    .calendar-day {
+      margin-bottom: 10px;
+    }
 
-        .calendar-day p {
-            font-size: 1rem;
-        }
+    .calendar-day p {
+      font-size: 1rem;
+    }
+
+    /* Media Queries for responsiveness */
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 30%;
+        min-width: 80px;
+      }
+
+      .main-content {
+        margin-left: 30%;
+        width: 70%;
+        float: right;
+      }
+
+      .sidebar-menu {
+        padding: 10px;
+      }
+
+      .sidebar-menu li {
+        margin-bottom: 10px;
+      }
+
+      .sidebar-menu a {
+        padding: 10px;
+      }
+
+      .sidebar-header h1 {
+        font-size: 1.2rem;
+      }
+
+      .user-profile {
+        margin-right: 10px;
+      }
+
+      .user-profile img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .user-profile span {
+        font-size: 0.8rem;
+      }
+
+      .logout-btn {
+        font-size: 0.8rem;
+      }
+
+      .content-area {
+        padding: 15px;
+      }
+
+      .content-area h2 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+      }
+
+      .dummy-chart,
+      .calendar {
+        width: 100%;
+        margin-top: 20px;
+      }
+    }
   </style>
 
 </head>
@@ -204,11 +277,11 @@
     </div>
     <ul class="sidebar-menu">
       <li><a href="Admin.html"><i class="fas fa-home"></i> Home</a></li>
-      <li><a href="A"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+      <li><a href="Analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
       <li><a href="#"><i class="fas fa-shopping-cart"></i> Manage Products</a></li>
-      <li><a href="#"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
+      <li><a href="Revieworders.html"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
       <li><a href="Shipments.html"><i class="fas fa-shipping-fast"></i> Shipments</a></li>
-      <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+      <li><a href="Reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
     </ul>
   </aside>
 
@@ -230,87 +303,39 @@
       <h2>Welcome to Admin Dashboard</h2>
       <!-- Content Goes Here -->
     </section>
+
     <div class="content-area">
-        <h2 class="analytics-heading">Analytics Overview</h2>
-        <div class="analytics-item">
-            <h3>Total Sales:</h3>
-            <p>PKR 81.74K</p>
+      <h2 class="analytics-heading">Analytics Overview</h2>
+      <div class="chart-container">
+        <div class="dummy-chart">
+          <!-- Dummy Chart -->
+          <h3>Sales Chart</h3>
+          <!-- Placeholder for the chart -->
+          <canvas id="sales-chart" width="400" height="200"></canvas>
         </div>
-        <div class="analytics-item">
-            <h3>Sessions:</h3>
-            <p>2.18K</p>
+      </div>
+      <div class="calendar">
+        <!-- Calendar -->
+        <h3 class="calendar-heading">Sales by Day</h3>
+        <!-- Dummy Calendar -->
+        <div class="calendar-day">
+          <p>May 1, 2024: 5 sales</p>
         </div>
-        <div class="analytics-item">
-            <h3>Total Orders:</h3>
-            <p>71</p>
+        <div class="calendar-day">
+          <p>May 2, 2024: 7 sales</p>
         </div>
-        <div class="analytics-item">
-            <h3>Orders to Fulfil:</h3>
-            <p>2</p>
+        <div class="calendar-day">
+          <p>May 3, 2024: 3 sales</p>
         </div>
-        <div class="analytics-item">
-            <h3>Payments to Capture:</h3>
-            <p>10+</p>
+        <div class="calendar-day">
+          <p>May 4, 2024: 6 sales</p>
         </div>
-
-        <div class="chart-container">
-            <div class="dummy-chart">
-                <!-- Dummy Chart -->
-                <h3>Sales Chart</h3>
-                <!-- Placeholder for the chart -->
-                <canvas id="sales-chart" width="400" height="200"></canvas>
-            </div>
-            <div class="calendar">
-                <!-- Calendar -->
-                <h3 class="calendar-heading">Sales by Day</h3>
-                <!-- Dummy Calendar -->
-                <div class="calendar-day">
-                    <p>May 1, 2024: 5 sales</p>
-                </div>
-                <div class="calendar-day">
-                    <p>May 2, 2024: 7 sales</p>
-                </div>
-                <div class="calendar-day">
-                    <p>May 3, 2024: 3 sales</p>
-                </div>
-                <div class="calendar-day">
-                    <p>May 4, 2024: 6 sales</p>
-                </div>
-                <div class="calendar-day">
-                    <p>May 5, 2024: 9 sales</p>
-                </div>
-                <!-- Add more days as needed -->
-            </div>
+        <div class="calendar-day">
+          <p>May 5, 2024: 9 sales</p>
         </div>
+        <!-- Add more days as needed -->
+      </div>
     </div>
-
-    <!-- Chart.js Library -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- JavaScript for Dummy Chart -->
-    <script>
-        const ctx = document.getElementById('sales-chart').getContext('2d');
-        const salesChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['May 1', 'May 2', 'May 3', 'May 4', 'May 5'],
-                datasets: [{
-                    label: 'Sales (PKR)',
-                    data: [5000, 7000, 3000, 6000, 9000],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
   </main>
 
   <!-- Custom JavaScript -->
@@ -325,8 +350,43 @@
       logoutBtn.addEventListener('click', function () {
         window.location.href = 'index.html';
       });
+
+      const toggleSidebarBtn = document.querySelector('.toggle-sidebar');
+      const sidebar = document.querySelector('.sidebar');
+      const mainContent = document.querySelector('.main-content');
+
+      toggleSidebarBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      });
+    });
+  </script>
+
+  <!-- Chart Script -->
+  <script>
+    const ctx = document.getElementById('sales-chart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['May 1', 'May 2', 'May 3', 'May 4', 'May 5'],
+        datasets: [{
+          label: 'Sales (PKR)',
+          data: [5000, 7000, 3000, 6000, 9000],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
     });
   </script>
 
 </body>
+
 </html>

@@ -18,11 +18,14 @@
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
         }
 
         /* Sidebar Styles */
         .sidebar {
             width: 250px;
+            min-width: 250px;
             height: 100vh;
             background-color: #2c3e50;
             color: #fff;
@@ -30,6 +33,7 @@
             left: 0;
             top: 0;
             overflow-y: auto;
+            transition: width 0.3s;
         }
 
         .sidebar-header {
@@ -65,6 +69,7 @@
         .main-content {
             margin-left: 250px;
             padding: 20px;
+            transition: margin-left 0.3s;
         }
 
         .main-header {
@@ -110,9 +115,7 @@
             color: #2c3e50;
             display: flex;
             align-items: center;
-            /* Center vertically */
             justify-content: center;
-            /* Center horizontally */
         }
 
         .logout-btn {
@@ -129,6 +132,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
         }
 
         .content-area h2 {
@@ -163,6 +167,7 @@
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
+            overflow-x: auto;
         }
 
         /* View Order Details Button */
@@ -197,7 +202,83 @@
 
         /* Highlighted Row Styles */
         .highlight {
-            background-color: #ffe6b3; /* You can adjust the color as needed */
+            background-color: #ffe6b3;
+            /* You can adjust the color as needed */
+        }
+
+        /* Media Queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 30%;
+                min-width: 80px;
+            }
+
+            .main-content {
+                margin-left: 30%;
+            }
+
+            .sidebar-menu {
+                padding: 10px;
+            }
+
+            .sidebar-menu li {
+                margin-bottom: 10px;
+            }
+
+            .sidebar-menu a {
+                padding: 10px;
+            }
+
+            .sidebar-header h1 {
+                font-size: 1.2rem;
+            }
+
+            .user-profile {
+                margin-right: 10px;
+            }
+
+            .user-profile img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .user-profile span {
+                font-size: 0.8rem;
+            }
+
+            .logout-btn {
+                font-size: 0.8rem;
+            }
+
+            .content-area {
+                padding: 15px;
+            }
+
+            .content-area h2 {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .orders-table th,
+            .orders-table td {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+
+            .view-order-btn,
+            .delete-order-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .buttons-container {
+                flex-wrap: wrap;
+            }
+
+            .buttons-container > * {
+                flex: 1 0 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 
@@ -212,8 +293,8 @@
         <ul class="sidebar-menu">
             <li><a href="Admin.html"><i class="fas fa-home"></i> Home</a></li>
             <li><a href="Analytics.html"><i class="fas fa-chart-bar"></i> Analytics</a></li>
-            <li><a href=""><i class="fas fa-shopping-cart"></i> Manage Products</a></li>
-            <li><a href="Manageorders.html"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
+            <li><a href="#"><i class="fas fa-shopping-cart"></i> Manage Products</a></li>
+            <li><a href="Revieworders.html"><i class="fas fa-clipboard-list"></i> Review Orders</a></li>
             <li><a href="Shipments.html"><i class="fas fa-shipping-fast"></i> Shipments</a></li>
             <li><a href="Reports.html"><i class="fas fa-file-alt"></i> Reports</a></li>
         </ul>
@@ -227,8 +308,7 @@
             </div>
             <div class="header-right">
                 <div class="user-profile">
-                    <img src="C:\Users\muham\OneDrive\Documents\GitHub\Web_Project\assets\images\Admin.jpg"
-                        alt="Admin Profile">
+                    <img src="Admin.jpg" alt="Admin Profile">
                     <span>Admin</span>
                 </div>
                 <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -237,45 +317,47 @@
         <section class="content-area">
             <h2>Review Orders</h2>
             <!-- Orders Table -->
-            <table class="orders-table">
-                <thead>
-                    <tr>
-                        <th>Select</th>
-                        <th>Order ID</th>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Product Name</th>
-                        <th>Product Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Dummy Data -->
-                    <tr>
-                        <td><input type="checkbox" name="order" value="1"></td>
-                        <td>123456</td>
-                        <td>John Doe</td>
-                        <td>123 Street, City</td>
-                        <td>Product A</td>
-                        <td>$50</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="order" value="2"></td>
-                        <td>789012</td>
-                        <td>Jane Smith</td>
-                        <td>456 Road, Town</td>
-                        <td>Product B</td>
-                        <td>$30</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="order" value="3"></td>
-                        <td>345678</td>
-                        <td>Michael Johnson</td>
-                        <td>789 Avenue, Village</td>
-                        <td>Product C</td>
-                        <td>$20</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="overflow-x: auto;">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Order ID</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Product Name</th>
+                            <th>Product Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dummy Data -->
+                        <tr>
+                            <td><input type="checkbox" name="order" value="1"></td>
+                            <td>123456</td>
+                            <td>John Doe</td>
+                            <td>123 Street, City</td>
+                            <td>Product A</td>
+                            <td>$50</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="order" value="2"></td>
+                            <td>789012</td>
+                            <td>Jane Smith</td>
+                            <td>456 Road, Town</td>
+                            <td>Product B</td>
+                            <td>$30</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="order" value="3"></td>
+                            <td>345678</td>
+                            <td>Michael Johnson</td>
+                            <td>789 Avenue, Village</td>
+                            <td>Product C</td>
+                            <td>$20</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <!-- Buttons Container -->
             <div class="buttons-container">
                 <!-- View Order Details Button -->
@@ -315,7 +397,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
