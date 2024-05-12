@@ -31,23 +31,39 @@
           <ion-icon name="search-outline"></ion-icon>
         </button>
       </div>
+      <!-- <div class="navbar-top">
+        <a href="#" class="logo">
+          <img src="./assets/images/logo.svg" alt="Paqzy logo" width="130" height="31">
+        </a>
+        <button class="nav-close-btn" data-nav-close-btn="" aria-label="Close Menu">
+          <ion-icon name="close-outline" role="img" class="md hydrated" aria-label="close outline"></ion-icon>
+        </button>
+      </div> -->
 
       <a href="#" class="logo">
         <img src="readme-images/PAQZY Shop.jpg" alt="Paqzy logo" width="130" height="31">
       </a>
 
+
       <div class="header-actions">
+        <a href="signin.html">
+          <button class="header-action-btn">
+            <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+            <p class="header-action-label">Sign In</p>
+          </button>
+        </a>
+
         <button class="header-action-btn">
           <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Search</p>
         </button>
 
-        <button class="header-action-btn">
-          <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
-          <p class="header-action-label">Cart</p>
-          <div class="btn-badge green" aria-hidden="true">3</div>
-        </button>
-
+        <!-- Add an ID to the cart button for easier access -->
+<button id="cartButton" class="header-action-btn">
+  <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
+  <p class="header-action-label">Cart</p>
+  <div class="btn-badge green" aria-hidden="true">3</div>
+</button>
         <button class="header-action-btn">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Wishlist</p>
@@ -64,7 +80,7 @@
       <nav class="navbar" data-navbar>
         <div class="navbar-top">
           <a href="#" class="logo">
-            <img src="readme-images/PAQZY Shop.jpg" alt="Paqzy logo" width="130" height="31">
+          <img src="readme-images/PAQZY Shop.jpg" alt="Paqzy logo" width="130" height="31">
           </a>
           <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
             <ion-icon name="close-outline"></ion-icon>
@@ -73,7 +89,7 @@
 
         <ul class="navbar-list">
           <li><a href="index.html" class="navbar-link">Home</a></li>
-          <li><a href="#" class="navbar-link">Shop</a></li>
+          <li><a href="shop.html" class="navbar-link">Shop</a></li>
           <li><a href="About.html" class="navbar-link">About</a></li>
           <li><a href="Blog.html" class="navbar-link">Blog</a></li>
           <li><a href="Contact.html" class="navbar-link">Contact</a></li>
