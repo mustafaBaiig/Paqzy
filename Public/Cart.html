@@ -1,188 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paqzy - Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" href="readme-images/favicon-32x32.png" type="image/svg+xml">
+        .container {
+            max-width: 900px; /* Increase the width of the container */
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-  <!-- Custom CSS -->
-  <style>
-    /* Custom CSS */
+        h1, h2, h4 {
+            color: #333;
+        }
 
-    /* Cart Section */
-    .cart {
-      padding: 50px 0;
-      text-align: center;
-    }
+        #customer-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    .cart h1 {
-      margin-bottom: 30px;
-      font-size: 36px;
-    }
+        #customer-form input, #customer-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
 
-    .cart-items {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+        button {
+            padding: 10px 20px;
+            background-color: #68b792;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
 
-    .cart-item {
-      margin: 20px;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      max-width: 300px;
-    }
+        button:hover {
+            background-color: #222d39;
+        }
 
-    .cart-item img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      margin-bottom: 20px;
-    }
+        #total {
+            margin-top: 20px;
+        }
 
-    .item-details h2 {
-      margin-bottom: 10px;
-    }
+        #total-amount {
+            font-weight: bold;
+            font-size: 18px;
+        }
 
-    .item-quantity {
-      margin-top: 20px;
-    }
+        .product {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+            overflow: hidden;
+        }
 
-    .quantity-btn {
-      cursor: pointer;
-      background-color: #f0f0f0;
-      border: none;
-      padding: 5px 10px;
-      font-size: 18px;
-    }
+        .product img {
+            max-width: 80px;
+            max-height: 80px;
+            margin-right: 20px;
+            float: left;
+        }
 
-    .quantity-input {
-      width: 50px;
-      text-align: center;
-    }
+        .product-info {
+            overflow: hidden;
+        }
 
-    .remove-btn {
-      margin-top: 20px;
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+        .product-description {
+            margin-top: 10px;
+        }
 
-    .cart-total {
-      margin-top: 50px;
-    }
+        .product-info div {
+            width: calc(100% - 120px);
+            float: left;
+        }
 
-    .checkout-btn {
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      padding: 15px 40px;
-      font-size: 18px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+        /* Center the logo */
+        .logo {
+            text-align: center;
+        }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+        .logo img {
+            max-width: 100px; /* Adjust the size of the logo */
+            margin-bottom: 5px;
+        }
+
+        /* Style for the buttons */
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .buttons a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 20px;
+            background-color: #68b792;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .buttons a:hover {
+            background-color: #00b3b0;
+        }
+    </style>
 </head>
-
 <body>
-
-  <!-- Header -->
-  <header class="header" data-header>
-    <!-- Header content -->
-  </header>
-
-  <!-- Main Content -->
-  <main>
-    <article>
-      <!-- Cart Section -->
-      <section class="cart">
-        <div class="container">
-          <h1>Your Cart</h1>
-          <div class="cart-items">
-            <!-- Cart items go here -->
-            <div class="cart-item">
-              <img src="item1.jpg" alt="Item 1">
-              <div class="item-details">
-                <h2>Product Name</h2>
-                <p>Price: $XX.XX</p>
-                <div class="item-quantity">
-                  <button class="quantity-btn minus">-</button>
-                  <input type="text" class="quantity-input" value="1" readonly>
-                  <button class="quantity-btn plus">+</button>
-                </div>
-              </div>
-              <button class="remove-btn">Remove</button>
-            </div>
-          </div>
-          <div class="cart-total">
-            <h2>Total: $XX.XX</h2>
-            <button class="checkout-btn">Proceed to Checkout</button>
-          </div>
+    <div class="logo">
+        <img src="readme-images/PAQZY Shop.jpg" alt="Paqzy Logo">
+    </div>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div id="cart">
+            <!-- Cart items will be displayed here dynamically -->
         </div>
-      </section>
-    </article>
-  </main>
+        <div id="customer-details">
+            <h4>Customer Details</h4>
+            <form id="customer-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+                <!-- Other fields like city, province, country can be added here -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <div id="discount">
+            <h4>Discount Code</h4>
+            <input type="text" id="discount-code" placeholder="Enter discount code">
+            <button onclick="applyDiscount()">Apply</button>
+        </div>
+        <div id="total">
+            <h4>Total:</h4>
+            <span id="total-amount">$0.00</span>
+        </div>
+        <button onclick="completePurchase()">Complete Purchase</button>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <!-- Footer content -->
-  </footer>
+        <div class="product">
+            <h4>Product Name</h4>
+            <div class="product-info">
+                <img src="Public\Product Images\electronic.jpeg" alt="Product Image">
+                <div>
+                    <p>Price: PKR 2000</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- Custom JavaScript -->
-  <script>
-    // Custom JavaScript
+    <!-- Buttons for Home and Shop -->
+    <div class="buttons">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+    </div>
 
-    document.addEventListener('DOMContentLoaded', function () {
-      const minusBtns = document.querySelectorAll('.minus');
-      const plusBtns = document.querySelectorAll('.plus');
-      const removeBtns = document.querySelectorAll('.remove-btn');
+    <script>
+        // Sample products
+        const products = [
+            { id: 1, name: 'Product 1', price: 10, image: 'product1.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+            { id: 2, name: 'Product 2', price: 20, image: 'product2.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+            { id: 3, name: 'Product 3', price: 30, image: 'product3.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
+        ];
 
-      minusBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-          const input = btn.nextElementSibling;
-          let value = parseInt(input.value);
-          if (value > 1) {
-            input.value = --value;
-          }
+        // Display cart items
+        function displayCart() {
+            const cartDiv = document.getElementById('cart');
+            cartDiv.innerHTML = '';
+
+            // Logic to display items in the cart
+            // This could involve iterating over items in the cart and displaying them dynamically
+        }
+
+        // Function to calculate total amount
+        function calculateTotal() {
+            // Logic to calculate total amount based on items in the cart
+            // Update the total amount in the HTML
+        }
+
+        // Apply discount code
+        function applyDiscount() {
+            const discountCode = document.getElementById('discount-code').value;
+            // Logic to validate discount code and apply discount if valid
+        }
+
+        // Complete purchase
+        function completePurchase() {
+            // Logic to submit customer details and cart items to the server
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            displayCart();
+            calculateTotal();
         });
-      });
 
-      plusBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-          const input = btn.previousElementSibling;
-          let value = parseInt(input.value);
-          input.value = ++value;
+        document.getElementById('customer-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Logic to handle form submission
         });
-      });
-
-      removeBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-          const item = btn.parentElement;
-          item.remove();
-        });
-      });
-    });
-  </script>
-
-  <!-- Ionicons -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule
-    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+    </script>
 </body>
-
 </html>
