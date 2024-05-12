@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     /* Media query for smaller screens */
@@ -157,7 +164,12 @@
         <data value="899">Rs 899</data>
         <p>Introducing our stylish Mobile Case - the ultimate fusion of fashion and protection! 📱💫 Elevate your device with our sleek and durable case, designed to safeguard your phone while making a bold style statement. 💥 Crafted from high-quality materials, it provides reliable defense against bumps, scratches, and everyday wear and tear. 🔒 With its slim profile and precise cutouts, our case offers easy access to all ports and buttons without adding extra bulk. ✨ Whether you prefer classic elegance or vibrant designs, we have the perfect case to complement your personality and elevate your look. 🌈 Express yourself and protect your investment in style with our irresistible collection of mobile cases today! 🛡️💖</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p>Left in quantity: <strong>3</strong></p>
+        <p>Delivery Time: <strong>7 working days</strong></p>
       </div>
     </div>
   </main>

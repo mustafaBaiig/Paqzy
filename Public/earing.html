@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     /* Media query for smaller screens */
@@ -157,7 +164,12 @@
         <data value="4999">Rs 4999</data>
         <p>Introducing our stunning Earrings - the epitome of elegance and sophistication! ✨ Elevate your look with these exquisite accessories that effortlessly blend style and grace. 💎 Crafted with meticulous attention to detail, each pair of earrings shines with brilliance, adding a touch of glamour to every ensemble. 💫 Whether you prefer classic studs for a timeless appeal or dangling earrings for a statement-making flair, we have the perfect pair to suit your taste. 💖 Made from high-quality materials, our earrings promise durability and lasting beauty, ensuring you'll cherish them for years to come. 🌸 Whether it's a casual outing with friends or a formal event, our earrings are the perfect finishing touch to any outfit. 💃 Embrace your individuality and express your unique style with our exquisite collection of earrings! 💃</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p>Left in quantity: <strong>3</strong></p>
+        <p>Delivery Time: <strong>7 working days</strong></p>
       </div>
     </div>
   </main>

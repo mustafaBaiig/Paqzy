@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     /* Media query for smaller screens */
@@ -153,11 +160,16 @@
         <img src="Product Images\fitnessProd.avif" alt="Product Image" style="width: 100%;">
       </div>
       <div class="product-info">
-        <h2>Whey Protien</h2>
+        <h2>Whey Protein</h2>
         <data value="5999">Rs 5999</data>
         <p>Introducing our premium Whey Protein - the ultimate fuel for your fitness journey! 💪🥛 Packed with pure protein power, each scoop delivers a delicious blend of essential amino acids to support muscle growth and recovery. 🏋️‍♂️💥 Crafted from the finest ingredients, our whey protein is ultra-filtered for maximum purity and solubility, ensuring a smooth and creamy texture with every shake. 🌟 Whether you're hitting the gym, powering through a busy day, or simply looking to boost your protein intake, our whey protein is the perfect solution. 🚀 Plus, with a variety of mouthwatering flavors to choose from, including rich chocolate, creamy vanilla, and decadent strawberry, there's something to satisfy every craving. 🍫🍓🥤 Elevate your workouts and unlock your full potential with our Whey Protein - the secret weapon for achieving your fitness goals! 💥🔥</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p><strong>Left in Quantity:</strong> 3</p>
+        <p><strong>Delivery Time:</strong> 7 working days</p>
       </div>
     </div>
   </main>

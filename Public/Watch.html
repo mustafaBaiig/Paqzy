@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     /* Media query for smaller screens */
@@ -157,7 +164,12 @@
         <data value="5000">Rs 5000</data>
         <p>Introducing our exquisite Watch - the ultimate accessory for the modern trendsetter! ⌚✨ Elevate your style game with this timeless timepiece that effortlessly blends fashion and function. 🌟 Crafted with precision and attention to detail, each watch in our collection exudes sophistication and charm. 💼⌛ Whether you prefer the classic elegance of a sleek leather band or the sporty appeal of a durable stainless steel bracelet, we have the perfect watch to suit your taste. 🏞️⌚ Designed for versatility, our watches transition seamlessly from the boardroom to the weekend adventure, ensuring you always make a statement wherever you go. 🌈⏱️ With a variety of stunning designs and reliable movements, our watches are more than just accessories - they're timeless companions for life's journey. 🌍💫 Elevate your wrist game and embrace the art of timekeeping with our exceptional collection of watches today! 🔝✨</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p><strong>Left in Quantity:</strong> 3</p>
+        <p><strong>Delivery Time:</strong> 7 working days</p>
       </div>
     </div>
   </main>

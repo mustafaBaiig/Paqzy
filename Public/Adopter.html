@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     /* Media query for smaller screens */
@@ -157,7 +164,12 @@
         <data value="4800">Rs 4800</data>
         <p>Introducing our sleek and efficient Charger Adapter 🌟 Charge up your devices with lightning speed and unparalleled convenience! 🔋 With its compact design, this adapter is your perfect on-the-go companion, fitting seamlessly into your pocket or bag. 🎒 Never be caught with a drained battery again - simply plug in and power up! 💪 Compatible with a wide range of devices, from smartphones to tablets and beyond, it's the versatile solution you've been searching for. ⚡️ Say goodbye to the frustration of slow charging and hello to seamless power wherever you are! ✨ Get your hands on our Charger Adapter today and stay connected with ease! 🚀</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p>Left in quantity: <strong>9</strong></p>
+        <p>Delivery Time: <strong>7 working days</strong></p>
       </div>
     </div>
   </main>

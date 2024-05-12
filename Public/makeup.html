@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     /* Media query for smaller screens */
@@ -157,7 +164,12 @@
         <data value="2500">Rs 2500</data>
         <p>Discover the magic of makeup with our exquisite collection! 💄✨ Transform yourself with our vibrant array of colors and luxurious textures, designed to enhance your natural beauty and unleash your inner glam. 💋 From velvety matte lipsticks that make a bold statement to shimmering eyeshadows that mesmerize, our makeup range offers endless possibilities for self-expression. 🌈 Pamper your skin with our silky foundations and weightless powders, formulated to create a flawless canvas that lasts all day. 🌟 Whether you're a makeup aficionado or a beginner, our products are easy to use and blend seamlessly, empowering you to create stunning looks with confidence. 💃 Elevate your makeup routine and indulge in the art of self-care with our irresistible collection today! 💖🎨</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p>Left in quantity: <strong>3</strong></p>
+        <p>Delivery Time: <strong>7 working days</strong></p>
       </div>
     </div>
   </main>

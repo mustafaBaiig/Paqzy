@@ -51,13 +51,20 @@
       margin-bottom: 20px;
     }
 
-    .add-to-cart {
+    .add-to-cart, .buy-now {
       padding: 10px 20px;
       background-color: #007bff;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     /* Media query for smaller screens */
@@ -157,7 +164,12 @@
         <data value="12999">Rs 12999</data>
         <p>Introducing our iconic Rolex Watch - a timeless symbol of luxury, precision, and sophistication! ⌚✨ Crafted with unparalleled craftsmanship and attention to detail, each timepiece represents the pinnacle of horological excellence. 🏆💎 From the classic elegance of the Datejust to the sporty allure of the Submariner, our collection offers a watch for every style and occasion. 🌟 Engineered with precision Swiss movements, our Rolex watches not only exude style but also deliver exceptional performance and accuracy. ⏱️💫 Whether you're attending a formal event or exploring the great outdoors, trust in the reliability and durability of a Rolex to accompany you on life's adventures. 🌍💼 Elevate your wrist game and make a statement of timeless elegance with our legendary Rolex watches today! ⌚🔝</p>
 
-        <button class="add-to-cart">Add to Cart</button>
+        <div class="buttons-container">
+          <button class="add-to-cart">Add to Cart</button>
+          <button class="buy-now">Buy It Now</button>
+        </div>
+        <p><strong>Left in Quantity:</strong> 3</p>
+        <p><strong>Delivery Time:</strong> 7 working days</p>
       </div>
     </div>
   </main>
