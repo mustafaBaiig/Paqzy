@@ -178,6 +178,22 @@
             { id: 3, name: 'Product 3', price: 30, image: 'product3.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
         ];
 
+
+
+        // Cart array to store added products
+        let cart = [];
+
+
+         function addToCart(productId) {
+          const product = products.find(p => p.id === productId);
+          if (product) {
+            // Add product to cart array
+            cart.push(product);
+            displayCart(); // Update display of cart items
+            calculateTotal(); // Update total amount after adding item
+          }
+        }
+
         // Display cart items
         function displayCart() {
             const cartDiv = document.getElementById('cart');
