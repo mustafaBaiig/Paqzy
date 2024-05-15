@@ -53,12 +53,18 @@
 
     .add-to-cart, .buy-now {
       padding: 10px 20px;
-      background-color: #007bff;
+      background-color:  #7FFFD4;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
+
+     
+    add-to-cart:hover, .buy-now:hover {
+      background-color: #66c6a2; /* Darker color when hovering over the button */
+    }
+
 
     .buttons-container {
       display: flex;
@@ -113,13 +119,13 @@
         <button class="header-action-btn">
           <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Cart</p>
-          <div class="btn-badge green" aria-hidden="true">3</div>
+          <div class="btn-badge green" aria-hidden="true">0</div>
         </button>
 
         <button class="header-action-btn">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Wishlist</p>
-          <div class="btn-badge" aria-hidden="true">2</div>
+          <div class="btn-badge" aria-hidden="true">0</div>
         </button>
       </div>
 

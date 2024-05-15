@@ -742,15 +742,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+document.querySelector('.search-btn').addEventListener('click', function() {
+  let input = document.querySelector('.input-field').value.toLowerCase();
+  let productCards = document.querySelectorAll('.product-card');
+
+  productCards.forEach(card => {
+    let title = card.querySelector('.card-title a').textContent.toLowerCase();
+    if (title.indexOf(input) > -1) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
 
 
 
   </script>
-
-
-
-</script>
-
 
 
 </body>

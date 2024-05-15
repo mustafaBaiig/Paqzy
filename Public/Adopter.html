@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paqzy - Contact Us</title>
+  <title>Paqzy - Adapter</title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="readme-images/favicon-32x32.png" type="image/svg+xml">
@@ -22,6 +22,7 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
+      
     }
 
     .container {
@@ -53,13 +54,20 @@
 
     .add-to-cart, .buy-now {
       padding: 10px 20px;
-      background-color: #007bff;
+      background-color: #7FFFD4; /* Changed the background color to the one you provided */
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       margin-right: 10px;
+      font-weight: bold; /* Made the text bold */
+      transition: background-color 0.3s ease; /* Added a transition for a smooth color change */
     }
+
+    add-to-cart:hover, .buy-now:hover {
+      background-color: #66c6a2; /* Darker color when hovering over the button */
+    }
+
 
     .buttons-container {
       display: flex;
@@ -114,13 +122,13 @@
         <button class="header-action-btn">
           <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Cart</p>
-          <div class="btn-badge green" aria-hidden="true">3</div>
+          <div class="btn-badge green" aria-hidden="true">0</div>
         </button>
 
         <button class="header-action-btn">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Wishlist</p>
-          <div class="btn-badge" aria-hidden="true">2</div>
+          <div class="btn-badge" aria-hidden="true">0</div>
         </button>
       </div>
 

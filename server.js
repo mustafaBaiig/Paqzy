@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const nodemailer = require('nodemailer');
+
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt');
@@ -120,10 +122,57 @@ const Product = mongoose.model('Product', new mongoose.Schema({
     }
   });
   
+
+  app.post('/send-email', async (req, res) => {
+    const { email, name } = req.body;
   
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      port: 465,
+      secure: true,
+      logger: true,
+      secureConnection: false,
+      auth: {
+        user: 'paqzy.pk@gmail.com',
+        pass: 'gfxg kxso nczz bsxx',
+      },     
+    
+      tls: {
+
+         rejectUnauthorized: true
+      }
+    });
+  
+    let info = await transporter.sendMail({
+      from: '"PAQZY Shop" <paqzy.pk@gmail.com>',
+      to: email,
+      subject: 'Thank you for your purchase!',
+      text: `Dear ${name},\n\nThank you for purchasing from PAQZY Shop! We hope you enjoy your new items. You will receive a confirmation call soon.\n\nBest,\nThe PAQZY Shop Team`,
+    });
+  
+    res.status(200).json({ message: 'Email sent successfully' });
+  });
+  
+
+  app.post('/complete-purchase', async (req, res) => {
+  const { customerDetails, cart } = req.body;
+  try {
+    const collection = db.collection('purchases');
+    const result = await collection.insertOne({ customerDetails, cart });
+    res.status(200).json({ message: 'Purchase completed successfully' });
+  } catch (error) {
+    console.error('Error completing purchase:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
   const PORT = process.env.PORT || 8080;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
+
+
+
 })();
