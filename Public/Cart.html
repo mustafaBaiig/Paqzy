@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
+
+
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,6 +43,7 @@
 
         button {
             padding: 10px 20px;
+            margin-top: 20px;
             background-color: #68b792;
             color: #fff;
             border: none;
@@ -101,6 +105,7 @@
         .buttons {
             margin-top: 20px;
             text-align: center;
+            
         }
 
         .buttons a {
@@ -110,6 +115,7 @@
             background-color: #68b792;
             color: #fff;
             text-decoration: none;
+            
             border-radius: 3px;
         }
 
@@ -142,26 +148,9 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-        <div id="discount">
-            <h4>Discount Code</h4>
-            <input type="text" id="discount-code" placeholder="Enter discount code">
-            <button onclick="applyDiscount()">Apply</button>
-        </div>
-        <div id="total">
-            <h4>Total:</h4>
-            <span id="total-amount">$0.00</span>
-        </div>
+        
         <button onclick="completePurchase()">Complete Purchase</button>
 
-        <div class="product">
-            <h4>Product Name</h4>
-            <div class="product-info">
-                <img src="Public\Product Images\electronic.jpeg" alt="Product Image">
-                <div>
-                    <p>Price: PKR 2000</p>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Buttons for Home and Shop -->
