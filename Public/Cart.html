@@ -122,6 +122,24 @@
         .buttons a:hover {
             background-color: #00b3b0;
         }
+
+
+
+        .remove-btn {
+  padding: 10px 20px;
+  background-color: #ff6347; /* Tomato color */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+  background-color: #ff4500; /* Slightly darker tomato color on hover */
+}
+
+
     </style>
 </head>
 <body>
@@ -189,19 +207,36 @@
       const productElement = document.createElement('div');
       productElement.classList.add('product');
       productElement.innerHTML = `
-        <h4>${product.name}</h4>
-        <div class="product-info">
-          <img src="${product.image}" alt="${product.name}">
-          <div>
-            <p>Price: PKR ${product.price}</p>
-          </div>
-        </div>
-      `;
+  <h4>${product.name}</h4>
+  <div class="product-info">
+    <img src="${product.image}" alt="${product.name}">
+    <div>
+      <p>Price: PKR ${product.price}</p>
+      <button class="remove-btn" onclick="removeFromCart('${product._id}')">Remove from Cart</button>
+    </div>
+  </div>
+`;
       cartDiv.appendChild(productElement);
     });
   });
 
 
+  function removeFromCart(productId) {
+  fetch('/remove-from-cart', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ _id: productId }),
+  })
+  .then(response => response.json())
+  .then(result => {
+    // Remove the product from the cart in client-side JavaScript
+    cart = cart.filter(product => product._id !== productId);
+    // Refresh the cart display after product is removed
+    displayCart(cart);
+  });
+}
 
         // Display cart items
         function displayCart() {

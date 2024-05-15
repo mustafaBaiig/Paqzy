@@ -104,6 +104,24 @@ const Product = mongoose.model('Product', new mongoose.Schema({
   });
 
 
+
+  const { MongoClient, ObjectId } = require('mongodb'); // Import ObjectId
+
+  
+  app.delete('/remove-from-cart', async (req, res) => {
+    const productId = req.body._id;
+    try {
+      const collection = db.collection('cart');
+      const result = await collection.deleteOne({ _id: new ObjectId(productId) }); // Use ObjectId
+      res.status(200).json({ message: 'Product removed from cart' });
+    } catch (error) {
+      console.error('Error removing product from cart:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+  
+
   const PORT = process.env.PORT || 8080;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
