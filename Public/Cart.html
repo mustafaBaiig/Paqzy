@@ -163,7 +163,6 @@
                 <label for="phone">Phone:</label>
                 <input type="tel" id="phone" name="phone" required>
                 <!-- Other fields like city, province, country can be added here -->
-                <button type="submit">Submit</button>
             </form>
         </div>
         
@@ -257,6 +256,66 @@
             event.preventDefault();
             // Logic to handle form submission
         });
+
+
+
+        function sendThankYouEmail(email, name) {
+  fetch('/send-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, name }),
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result.message);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+
+
+        function completePurchase() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const address = document.getElementById('address').value;
+  const phone = document.getElementById('phone').value;
+
+  // Include product names in the cart data
+  const cartWithProductNames = cart.map(product => ({
+    ...product,
+    productName: product.name,
+  }));
+
+  const purchaseData = {
+    customerDetails: { name, email, address, phone },
+    cart: cartWithProductNames,
+  };
+
+  fetch('/complete-purchase', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(purchaseData),
+  })
+  .then(response => response.json())
+  .then(result => {
+    console.log(result.message);
+    // Handle successful purchase here, e.g. show a success message and clear the cart
+
+    // Call the sendThankYouEmail function
+    sendThankYouEmail(email, name);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+
     </script>
 </body>
 </html>
