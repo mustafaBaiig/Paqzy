@@ -62,12 +62,12 @@
 <button id="cartButton" class="header-action-btn">
   <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
   <p class="header-action-label">Cart</p>
-  <div class="btn-badge green" aria-hidden="true">3</div>
+  <div class="btn-badge green" aria-hidden="true">0</div>
 </button>
         <button class="header-action-btn">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
           <p class="header-action-label">Wishlist</p>
-          <div class="btn-badge" aria-hidden="true">2</div>
+          <div class="btn-badge" aria-hidden="true">0</div>
         </button>
       </div>
 
@@ -689,6 +689,42 @@
   <!-- Ionicons -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<script>
+
+  // Find the 'Add to Cart' button and attach a click event listener
+// Find the 'Add to Cart' button and attach a click event listener
+// Find all 'Add to Cart' buttons and attach a click event listener to each
+document.querySelectorAll('.card-action-btn.cart-btn').forEach(function(button) {
+  button.addEventListener('click', function() {
+    // Select the badge element
+    var badge = document.querySelector('#cartButton .btn-badge');
+    // Get the current badge count and increment it
+    var count = parseInt(badge.textContent) || 0;
+    badge.textContent = count + 1;
+
+    // Show a notification
+    alert('Product added to cart!');
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+      // Get the cart button by its ID
+      const cartButton = document.getElementById('cartButton');
+  
+      // Add click event listener to the cart button
+      cartButton.addEventListener('click', function() {
+        // Redirect to cart.html
+        window.location.href = 'cart.html';
+      });
+    });
+  </script>
+
+
+
+</script>
+
+
 
 </body>
 
