@@ -721,6 +721,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+    document.querySelectorAll('.card-action-btn.cart-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const productCard = button.closest('.product-card');
+    const productName = productCard.querySelector('.h4.card-title a').textContent;
+    const productPrice = productCard.querySelector('.card-price data').getAttribute('value');
+    const productImage = productCard.querySelector('.card-banner img').getAttribute('src');
+
+    const product = { name: productName, price: productPrice, image: productImage };
+
+    // Send a request to your server to add the product to the cart
+    fetch('/add-to-cart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    });
+  });
+});
+
+
+
+
+
   </script>
 
 

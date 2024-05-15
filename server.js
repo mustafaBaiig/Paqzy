@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const bcrypt = require('bcrypt');
 const app = express();
@@ -14,6 +15,13 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 let db;
 let findUser, createUser, validatePassword;
+
+
+const Product = mongoose.model('Product', new mongoose.Schema({
+  name: String,
+  price: Number,
+  image: String,
+}));
 
 (async function() {
   await client.connect();
@@ -70,6 +78,21 @@ let findUser, createUser, validatePassword;
     }
   });
   
+
+  app.post('/add-to-cart', async (req, res) => {
+    const product = req.body;
+    try {
+      // Add the product to the cart in the database
+      const collection = db.collection('cart');
+      const result = await collection.insertOne(product);
+      res.status(201).json({ message: 'Product added to cart' });
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+
 
   const PORT = process.env.PORT || 8080;
   app.listen(PORT, () => {
