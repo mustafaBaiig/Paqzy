@@ -133,8 +133,8 @@ const Product = mongoose.model('Product', new mongoose.Schema({
       logger: true,
       secureConnection: false,
       auth: {
-        user: 'paqzypakistan@gmail.com',
-        pass: 'PAQZYNEW123',
+        user: 'paqzy.pk@gmail.com',
+        pass: 'gfxg kxso nczz bsxx',
       },     
     
       tls: {
