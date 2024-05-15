@@ -37,6 +37,27 @@
       background-color: #7FFFD4 !important; /* Custom button color */
       color: rgb(0, 0, 0) !important; /* Text color */
     }
+
+    .modal-content {
+      padding: 20px;
+    }
+
+    .modal-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4cc9f0;
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-btn:hover {
+      background-color: #38b8d6;
+    }
   </style>
 </head>
 
@@ -56,33 +77,121 @@
 
         <!-- Add 'btn btn-custom' classes to the button -->
         <button type="submit" class="btn btn-custom">Sign In</button>
+        <button type="button" class="signin-btn" data-toggle="modal" data-target="#signupModal">Sign Up</button>
+
       </form>
     </div>
   </section>
 
-  <!-- JavaScript -->
-  <script>
+
+
+  <!-- Sign Up Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="signup-form">
+            <div class="form-group">
+              <label for="new-username">Name:</label>
+              <input type="text" class="signin-input" id="new-username" required>
+            </div>
+            <div class="form-group">
+              <label for="new-password">New Password:</label>
+              <input type="password" class="signin-input" id="new-password" required>
+            </div>
+            <button type="submit" class="modal-btn">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+  
     document.addEventListener("DOMContentLoaded", function () {
-      const signinForm = document.getElementById("signin-form");
-      const usernameInput = document.getElementById("username");
-      const passwordInput = document.getElementById("password");
+  const signinForm = document.getElementById("signin-form");
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
 
-      signinForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value.trim();
+  signinForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
 
-        // Check if the username and password match the credentials
-        if (username === "Admin" && password === "wizards") {
-          // Redirect the user to the index.html page
-          window.location.href = "Admin.html";
-        } else {
-          // Display an error message or handle incorrect credentials
-          alert("Incorrect username or password. Please try again.");
-        }
-      });
+    // Send a request to the server to check the username and password
+    fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    })
+    .then(response => response.json())
+    .then(data => {
+  if (data.message === 'Logged in successfully') {
+    // If the login was successful, redirect the user
+    window.location.href = "Admin.html";
+  } else {
+    // If the login was not successful, show an error message
+    alert("Incorrect username or password. Please try again.");
+  }
+})
+    .catch((error) => {
+      console.error('Error:', error);
     });
-  </script>
+  });
+});
+
+
+    // Handle sign-up form submission
+    // Your existing code...
+
+// Handle sign-up form submission
+const signupForm = document.getElementById("signup-form");
+signupForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+  const newName = document.getElementById("new-username").value.trim();
+  const newPassword = document.getElementById("new-password").value.trim();
+
+  try {
+    const response = await fetch('/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: newName, password: newPassword })
+    });
+
+    const data = await response.json();
+
+    if (response.status === 201) {
+      console.log("New user registered:", newName, newPassword);
+      alert(data.message); // Show the success message
+      $('#signupModal').modal('hide');
+    } else {
+      throw new Error(data.error || 'Failed to register user');
+    }
+  } catch (error) {
+    console.error('Error:', error.message);
+    alert(error.message);
+  }
+});
+
+
+  
+</script>
+
+
 
 </body>
 
