@@ -92,6 +92,16 @@ const Product = mongoose.model('Product', new mongoose.Schema({
     }
   });
   
+  app.get('/get-cart', async (req, res) => {
+    try {
+      const collection = db.collection('cart');
+      const cart = await collection.find().toArray();
+      res.status(200).json(cart);
+    } catch (error) {
+      console.error('Error getting cart:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 
   const PORT = process.env.PORT || 8080;

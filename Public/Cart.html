@@ -171,15 +171,7 @@
     </div>
 
     <script>
-        // Sample products
-        const products = [
-            { id: 1, name: 'Product 1', price: 10, image: 'product1.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-            { id: 2, name: 'Product 2', price: 20, image: 'product2.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-            { id: 3, name: 'Product 3', price: 30, image: 'product3.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }
-        ];
-
-
-
+        
         // Cart array to store added products
         let cart = [];
 
@@ -194,6 +186,34 @@
           }
         }
 
+
+        fetch('/get-cart')
+  .then(response => response.json())
+  .then(cart => {
+    // Now 'cart' contains the cart data from your server
+    // You can use this data to display the cart items on the page
+    const cartDiv = document.getElementById('cart');
+    cartDiv.innerHTML = ''; // Clear current cart display
+
+    // For each product in cart, create HTML and append to cartDiv
+    cart.forEach(product => {
+      const productElement = document.createElement('div');
+      productElement.classList.add('product');
+      productElement.innerHTML = `
+        <h4>${product.name}</h4>
+        <div class="product-info">
+          <img src="${product.image}" alt="${product.name}">
+          <div>
+            <p>Price: PKR ${product.price}</p>
+          </div>
+        </div>
+      `;
+      cartDiv.appendChild(productElement);
+    });
+  });
+
+
+
         // Display cart items
         function displayCart() {
             const cartDiv = document.getElementById('cart');
@@ -201,23 +221,6 @@
 
             // Logic to display items in the cart
             // This could involve iterating over items in the cart and displaying them dynamically
-        }
-
-        // Function to calculate total amount
-        function calculateTotal() {
-            // Logic to calculate total amount based on items in the cart
-            // Update the total amount in the HTML
-        }
-
-        // Apply discount code
-        function applyDiscount() {
-            const discountCode = document.getElementById('discount-code').value;
-            // Logic to validate discount code and apply discount if valid
-        }
-
-        // Complete purchase
-        function completePurchase() {
-            // Logic to submit customer details and cart items to the server
         }
 
         // Event listeners
