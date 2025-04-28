@@ -25,7 +25,7 @@ const Product = mongoose.model('Product', new mongoose.Schema({
 
 // Add a route handler for the root path
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'Public', 'index.html'));
 });
 
 (async function() {
@@ -168,7 +168,7 @@ app.get('/', (req, res) => {
 
     // Add a catch-all route for SPA support (if needed)
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'public', 'index.html'));
+      res.sendFile(path.join(__dirname, 'Public', 'index.html'));
     });
 
     const PORT = process.env.PORT || 8080;
