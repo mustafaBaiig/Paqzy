@@ -8,7 +8,7 @@ const app = express();
 const authRoutes = require('./routes/authRoutes');
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Public')));
 app.use('/auth', authRoutes);
 
 const uri = "mongodb://localhost:27017/paqzy1";
