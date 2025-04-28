@@ -2,27 +2,17 @@ const express = require('express');
 const path = require('path');
 const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ObjectId } = require('mongodb'); // Import ObjectId once, at the top
 const bcrypt = require('bcrypt');
-const helmet = require('helmet');  // Importing helmet for security headers
 const app = express();
 const authRoutes = require('./routes/authRoutes');
-
-// Use helmet to set various security headers
-app.use(helmet());
-
-// Set up a custom Content Security Policy (CSP) for your app
-app.use((req, res, next) => {
-  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' http://20.120.102.228; connect-src 'self'; img-src 'self' data:;");
-  next();
-});
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth', authRoutes);
 
 const uri = "mongodb://localhost:27017/paqzy1";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(uri);
 
 let db;
 let findUser, createUser, validatePassword;
@@ -33,18 +23,23 @@ const Product = mongoose.model('Product', new mongoose.Schema({
   image: String,
 }));
 
-// MongoDB connection setup
+// Add a route handler for the root path
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 (async function() {
   try {
     await client.connect();
     console.log('Connected to MongoDB');
     db = client.db('paqzy1');
+    // Pass the db instance to your user model
     const userFunctions = require('./models/user')(db);
     findUser = userFunctions.findUser;
     createUser = userFunctions.createUser;
     validatePassword = userFunctions.validatePassword;
 
-    // Signup route
+    // Now you can use findUser, createUser, and validatePassword in your routes
     app.post('/signup', async (req, res) => {
       const { name, password } = req.body;
       
@@ -64,7 +59,7 @@ const Product = mongoose.model('Product', new mongoose.Schema({
       }
     });
 
-    // Login route
+    // Add a login route
     app.post('/login', async (req, res) => {
       const { username, password } = req.body;
     
@@ -88,8 +83,7 @@ const Product = mongoose.model('Product', new mongoose.Schema({
         res.status(500).json({ error: 'Internal server error' });
       }
     });
-  
-    // Add to cart route
+    
     app.post('/add-to-cart', async (req, res) => {
       const product = req.body;
       try {
@@ -102,8 +96,7 @@ const Product = mongoose.model('Product', new mongoose.Schema({
         res.status(500).json({ error: 'Internal server error' });
       }
     });
-
-    // Get cart route
+    
     app.get('/get-cart', async (req, res) => {
       try {
         const collection = db.collection('cart');
@@ -114,9 +107,7 @@ const Product = mongoose.model('Product', new mongoose.Schema({
         res.status(500).json({ error: 'Internal server error' });
       }
     });
-
-    // Remove from cart route
-    const { ObjectId } = require('mongodb');
+    
     app.delete('/remove-from-cart', async (req, res) => {
       const productId = req.body._id;
       try {
@@ -128,8 +119,7 @@ const Product = mongoose.model('Product', new mongoose.Schema({
         res.status(500).json({ error: 'Internal server error' });
       }
     });
-
-    // Send email route
+    
     app.post('/send-email', async (req, res) => {
       const { email, name } = req.body;
     
@@ -149,22 +139,26 @@ const Product = mongoose.model('Product', new mongoose.Schema({
         }
       });
     
-      let info = await transporter.sendMail({
-        from: '"PAQZY Shop" <paqzy.pk@gmail.com>',
-        to: email,
-        subject: 'Thank you for your purchase!',
-        text: `Dear ${name},\n\nThank you for purchasing from PAQZY Shop! We hope you enjoy your new items. You will receive a confirmation call soon.\n\nBest,\nThe PAQZY Shop Team`,
-      });
-    
-      res.status(200).json({ message: 'Email sent successfully' });
+      try {
+        let info = await transporter.sendMail({
+          from: '"PAQZY Shop" <paqzy.pk@gmail.com>',
+          to: email,
+          subject: 'Thank you for your purchase!',
+          text: `Dear ${name},\n\nThank you for purchasing from PAQZY Shop! We hope you enjoy your new items. You will receive a confirmation call soon.\n\nBest,\nThe PAQZY Shop Team`,
+        });
+      
+        res.status(200).json({ message: 'Email sent successfully' });
+      } catch (emailError) {
+        console.error('Error sending email:', emailError);
+        res.status(500).json({ error: 'Failed to send email' });
+      }
     });
-
-    // Complete purchase route
+    
     app.post('/complete-purchase', async (req, res) => {
       const { customerDetails, cart } = req.body;
       try {
         const collection = db.collection('purchases');
-        const result = await collection.insertOne({ customerDetails, cart });
+        const result = await collection.insertOne({ customerDetails, cart, date: new Date() });
         res.status(200).json({ message: 'Purchase completed successfully' });
       } catch (error) {
         console.error('Error completing purchase:', error);
@@ -172,14 +166,29 @@ const Product = mongoose.model('Product', new mongoose.Schema({
       }
     });
 
-    // Start server
+    // Add a catch-all route for SPA support (if needed)
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    });
+
     const PORT = process.env.PORT || 8080;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
 
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-    process.exit(1);  // Exit process with failure
+  } catch (err) {
+    console.error('Failed to connect to MongoDB or start server:', err);
+    process.exit(1);
   }
 })();
+
+// Handle unexpected errors
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('SIGINT', async () => {
+  await client.close();
+  console.log('MongoDB connection closed');
+  process.exit(0);
+});
